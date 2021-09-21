@@ -1,0 +1,87 @@
+﻿@model WebClients.Models.Client
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+	<h4>Client</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Email)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Email)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Phone)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Phone)
+		</dd>
+	</dl>
+</div>
+<h3>Addresses</h3>
+
+@if (ViewBag.addresses != null)
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					Street
+				</th>
+				<th>
+					Number
+				</th>
+				<th>
+					City
+				</th>
+				<th>
+					State
+				</th>
+				<th>
+					Country
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in ViewBag.addresses)
+			{
+				<tr>
+					<td>
+						@item.Street
+					</td>
+					<td>
+						@item.Number
+					</td>
+					<td>
+						@item.City
+					</td>
+					<td>
+						@item.State
+					</td>
+					<td>
+						@item.Country
+					</td>
+					<td>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+<div>
+	<a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+	<a asp-action="Index">Back to List</a>
+</div>

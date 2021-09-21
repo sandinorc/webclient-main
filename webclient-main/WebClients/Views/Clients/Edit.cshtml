@@ -1,0 +1,100 @@
+﻿@model WebClients.Models.Client
+
+@{
+	ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Client</h4>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Edit">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" asp-for="id" />
+			<div class="form-group">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Email" class="control-label"></label>
+				<input asp-for="Email" class="form-control" />
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Phone" class="control-label"></label>
+				<input asp-for="Phone" class="form-control" />
+				<span asp-validation-for="Phone" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Save" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+<h3>Addresses</h3>
+<div class="form-group">
+	<input type="button" value="New" class="btn btn-primary" onclick="document.location.href = '/Addresses/create/?clientID=@Model.id'"/>
+</div>
+@if (ViewBag.addresses != null)
+{
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					Street
+				</th>
+				<th>
+					Number
+				</th>
+				<th>
+					City
+				</th>
+				<th>
+					State
+				</th>
+				<th>
+					Country
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in ViewBag.addresses)
+			{
+				<tr>
+					<td>
+						@item.Street
+					</td>
+					<td>
+						@item.Number
+					</td>
+					<td>
+						@item.City
+					</td>
+					<td>
+						@item.State
+					</td>
+					<td>
+						@item.Country
+					</td>
+					<td>
+						<a href="/Addresses/edit/@item.id">Edit</a> |
+						<a href="/Addresses/Details/@item.id">Details</a> |
+						<a href="/Addresses/delete/@item.id">Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
